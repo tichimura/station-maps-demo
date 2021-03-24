@@ -102,6 +102,46 @@ body { margin: 0; padding: 0; }
           'source': 'gif2',
           'paint': { 'raster-opacity': 0.85 }
         });           
+
+       map.addLayer({
+          'id': 'gifLayer2',
+          'type': 'raster',
+          // Use "iso" as the data source for this layer
+          'source': 'gif2',
+          'paint': { 'raster-opacity': 0.85 }
+        });           
+      
+      map.addSource('gif3', {
+                'type': 'image',
+                // 'url': 'https://docs.mapbox.com/mapbox-gl-js/assets/radar.gif',
+                'url': 'https://user-images.githubusercontent.com/1793451/112251108-fa2ded00-8c9d-11eb-9fe5-39e5660d51e3.png',          
+                "coordinates": [
+			[
+		          139.76541203920243,
+		          35.69910519525931
+			],
+			[
+			  139.76317537312548,
+			  35.6997373644797
+			],
+			[
+			  139.76353117334162,
+			  35.70059276352033
+			],
+			[
+      139.76579980785834,
+      35.69995530129867
+			]
+                ]
+        });
+
+        map.addLayer({
+          'id': 'gifLayer3',
+          'type': 'raster',
+          // Use "iso" as the data source for this layer
+          'source': 'gif3',
+          'paint': { 'raster-opacity': 0.85 }
+        });   
       
     });
     
