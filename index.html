@@ -347,7 +347,7 @@
     });
     
 
-    map.on('click', 'jr-demo2', function(e){
+    map.on('click', 'jr-demo3', function(e){
 	    
       console.log(e.features[0]);
       map.flyTo({
@@ -359,7 +359,7 @@
     
       function buildLocationList(data) {
 	      
-	var station_features = map.queryRenderedFeatures({ layers: ['jr-demo2'] });	
+	var station_features = map.queryRenderedFeatures({ layers: ['jr-demo3'] });	
         station_features.forEach(function (store, i) {
           /**
            * Create a shortcut for `store.properties`,
