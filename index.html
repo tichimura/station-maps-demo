@@ -350,7 +350,7 @@
     map.on('click', 'jr-demo2', function(e){
       map.flyTo({
         center: e.features[0].geometry.coordinates,
-//         bearing: e.features[0].properties.bearing,
+        bearing: e.features[0].properties.bearing,
         zoom: 18	      
       });
     })
