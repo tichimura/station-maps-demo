@@ -171,6 +171,12 @@ body { margin: 0; padding: 0; }
       
     });
     
+
+    map.on('click', 'jr-demo2', function(e){
+      map.flyTo({
+        center: e.features[0].geometry.coordinates
+      });
+    })
     
 
 </script>
