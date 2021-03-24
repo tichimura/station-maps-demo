@@ -8,9 +8,6 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
 <link href="https://assets.website-files.com/5f291534dceb6cd8f0e7a02f/6019601de8e906e629493c4b_mapbox_favicon_32x32.png" rel="shortcut icon" type="image/x-icon"/>	
 <style type="text/css">
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-
 
       body {
         color: #404040;
@@ -115,15 +112,6 @@ body { margin: 0; padding: 0; }
       ::-webkit-scrollbar-thumb {
         background: #00853e;
         border-radius: 0;
-      }
-
-      .marker {
-        border: none;
-        cursor: pointer;
-        height: 56px;
-        width: 56px;
-        background-image: url(https://docs.mapbox.com/help/demos/building-a-store-locator/marker.png);
-        background-color: rgba(0, 0, 0, 0);
       }
 
       .clearfix {
@@ -415,8 +403,6 @@ body { margin: 0; padding: 0; }
 			
 		  zoom: 15
 		});
-	      }		      
-//                 createPopUp(clickedListing);
               }
             }
             var activeItem = document.getElementsByClassName('active');
