@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mapbox Maps for your City</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+<link href="https://assets.website-files.com/5f291534dceb6cd8f0e7a02f/6019601de8e906e629493c4b_mapbox_favicon_32x32.png" rel="shortcut icon" type="image/x-icon"/>	
+<style type="text/css">
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+
+</style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+
+<script>
+
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoidGljaGltdXJhIiwiYSI6ImNrMnBpN3NxMzA0bGMzbnBpdmhqd2EyazQifQ.5ozS730sMWdKGe5gx32BJA';
+
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        zoom: 14,
+        center: [139.74532491602395,35.704151331565924],
+        style: 'mapbox://styles/mapbox/light-v10'
+    });
+
+
+    map.on('load', function () {
+        // Add a GeoJSON source containing place coordinates and information.
+
+
+        map.addSource('gif1', {
+                'type': 'image',
+                // 'url': 'https://docs.mapbox.com/mapbox-gl-js/assets/radar.gif',
+                'url': 'https://user-images.githubusercontent.com/1793451/112234285-8846ab00-8c7f-11eb-9c4c-b2d01344e4a3.png',          
+                "coordinates": [
+                    [
+                      139.70240076659059,
+                      35.65723961173801
+                    ],
+                    [
+                      139.7011374768549,
+                      35.65969202092519
+                    ],                  
+                    [
+                      139.702563200059,
+                      35.66020285545352
+                    ],
+                    [
+                      139.70383613459353,
+                      35.657753872675116
+                    ],
+                ]
+        });
+
+        map.addLayer({
+          'id': 'gifLayer1',
+          'type': 'raster',
+          // Use "iso" as the data source for this layer
+          'source': 'gif1',
+          'paint': { 'raster-opacity': 0.85 }
+        });   
+      
+      
+       map.addSource('gif2', {
+                'type': 'image',
+                // 'url': 'https://docs.mapbox.com/mapbox-gl-js/assets/radar.gif',
+                'url': 'https://user-images.githubusercontent.com/1793451/112235353-ce9d0980-8c81-11eb-8e5e-3ab06ce7602c.png',          
+                "coordinates": [
+                      [
+                        139.74121835308614,
+                        35.69999177865097
+                      ],
+                      [
+                        139.74532491602395,
+                        35.704151331565924
+                      ],
+                      [
+                        139.747358624943,
+                        35.702833097024495
+                      ],
+                      [
+                        139.74320330512847,
+                        35.698695729437105
+                      ],
+                ]
+        });
+
+        map.addLayer({
+          'id': 'gifLayer2',
+          'type': 'raster',
+          // Use "iso" as the data source for this layer
+          'source': 'gif2',
+          'paint': { 'raster-opacity': 0.85 }
+        });           
+      
+    });
+    
+    
+
+</script>
+
+</body>
+</html>
+    
+     
