@@ -407,8 +407,8 @@
                 var clickedListing = station_features[i];
 		map.flyTo({
 		  center: clickedListing.geometry.coordinates,
-			
-		  zoom: 15
+		  bearing: clickedListing.properties.bearing,
+		  zoom: 18			
 		});
               }
             }
