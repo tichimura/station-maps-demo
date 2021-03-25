@@ -360,6 +360,9 @@
       function buildLocationList(data) {
 	      
 	var station_features = map.queryRenderedFeatures({ layers: ['jr-demo3'] });	
+	console.log("station feature");
+	console.log(station_features);
+	      
         station_features.forEach(function (store, i) {
           /**
            * Create a shortcut for `store.properties`,
@@ -379,15 +382,15 @@
           var link = listing.appendChild(document.createElement('a'));
           link.href = '#';
           link.className = 'title';
-          link.id = 'link-' + prop.id;
-          link.innerHTML = prop.address;
+          link.id = 'link-' + prop.pnum;
+          link.innerHTML = prop.name;
 
-          /* Add details to the individual listing. */
-          var details = listing.appendChild(document.createElement('div'));
-          details.innerHTML = prop.city;
-          if (prop.phone) {
-            details.innerHTML += ' &middot; ' + prop.phoneFormatted;
-          }
+//           /* Add details to the individual listing. */
+//           var details = listing.appendChild(document.createElement('div'));
+//           details.innerHTML = prop.city;
+//           if (prop.phone) {
+//             details.innerHTML += ' &middot; ' + prop.phoneFormatted;
+//           }
 
           /**
            * Listen to the element and when it is clicked, do four things:
@@ -399,7 +402,7 @@
           link.addEventListener('click', function (e) {
             for (var i = 0; i < station_features.length; i++) {
               if (this.id === 'link-' + station_features[i].properties.pnum) {
-                var clickedListing = station_featuress[i];
+                var clickedListing = station_features[i];
 		map.flyTo({
 		  center: clickedListing.geometry.coordinates,
 			
