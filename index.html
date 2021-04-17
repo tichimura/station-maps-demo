@@ -346,7 +346,14 @@
         buildLocationList(e);	    
 	    
     });
-    
+
+	map.on('click', 'work-data', function(e){
+
+	  var popup = new mapboxgl.Popup()
+	      .setLngLat(e.lngLat)
+	      .setHTML(`<h3>` + e.features[0].properties.cnt + `</h3>`+`<h4 style="text-align: center">` + e.features[0].properties.nam + `</h4>`+`<h4 style="text-align: center">` + e.features[0].properties.pps + `</h4>`+`<h4 style="text-align: center">` + e.features[0].properties.srg + `</h4>`+`<h4 style="text-align: center">` + e.features[0].properties.rdn + `</h4>`)
+	      .addTo(map);
+	})	
 
     map.on('click', 'jr-demo3', function(e){
 	    
