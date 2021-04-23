@@ -6,13 +6,17 @@
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
-<link href="https://assets.website-files.com/5f291534dceb6cd8f0e7a02f/6019601de8e906e629493c4b_mapbox_favicon_32x32.png" rel="shortcut icon" type="image/x-icon"/>	
+<link href="https://assets.website-files.com/5f291534dceb6cd8f0e7a02f/6019601de8e906e629493c4b_mapbox_favicon_32x32.png" rel="shortcut icon" type="image/x-icon"/>
+<!-- Import Tabletop -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+<!-- Import jQuery -->
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <style type="text/css">
 
     body { margin: 0; padding: 0; }
 
     #map { position: absolute; top: 0; bottom: 0; width: 100%; border-left: 1px solid #fff }
-    
+
     .mapboxgl-popup {
       padding-bottom: 5px;
     }
@@ -78,12 +82,14 @@
 
 <script>
 
-	mapboxgl.accessToken = 'pk.eyJ1IjoidGljaGltdXJhIiwiYSI6ImNrbWJhamE3ZDF6b2kyb210YWxpN3YyM3gifQ.VpB0MzutVQziz2fybIR0HA';
+	// mapboxgl.accessToken = 'pk.eyJ1IjoidGljaGltdXJhIiwiYSI6ImNrbWJhamE3ZDF6b2kyb210YWxpN3YyM3gifQ.VpB0MzutVQziz2fybIR0HA';
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGljaGltdXJhIiwiYSI6ImNrMnBpN3NxMzA0bGMzbnBpdmhqd2EyazQifQ.5ozS730sMWdKGe5gx32BJA';
+
 
     var map = new mapboxgl.Map({
         container: 'map',
         zoom: 15,
-        center: [139.73070222009164,35.689708324156825],
+        center: [139.69936089963744, 35.69350996590232],
         bearing: -150,
         pitch: 60,
         style: 'mapbox://styles/tichimura/ckmnn5wu41cdz17qb95l492oy/draft',
@@ -95,6 +101,7 @@
     map.on('load', function () {
         // Add a GeoJSON source containing place coordinates and information.
 
+        init();
 
         map.addSource('shibuya', {
                 'type': 'image',
@@ -236,12 +243,41 @@
               .addTo(map);
         });
 
-        var videos = {'RQA5RcIZlAM':[139.69936089963744, 35.69350996590232],'lkIJYc4UH60':[139.70030208085188,35.6595574453778],'ZbekZoIwPl4':[139.73070222009164,35.689708324156825]}; 
-        var videoid;
-        var i = 0;
-        for ( videoid in videos){
-              
-              var phtml = 'var tag = document.createElement(\'script\');\n'
+
+        // Initialize Tabletop to access your table
+        function init() {
+          Tabletop.init({
+            // YOUR TURN: change 'key' value to point to your spreadsheet
+            // key: 'https://docs.google.com/spreadsheets/d/1bdDQENlcBzZLhF50AFur1AcP24oBtTvp5QXuDlmd06Q/edit?usp=sharing',
+            key: 'https://docs.google.com/spreadsheets/d/1JME4K6uLPtFGeZwqHPLnGoxtuIgfbg-SmTPcmnjDxNo/edit?usp=sharing',
+            // key: 'https://docs.google.com/spreadsheets/d/2PACX-1vS6g2Pcs2a99ntvq7EM0IaMxdWe8ajAMEqPoa3uFY1EAn3RRluWzDJ-hNdxYNumdZpWWSHlysyKG0Zl',
+            // once Tabletop has loaded the data, it passes it to the 'callback' function, 'addPoints', defined below
+            callback: addPoints,
+            simpleSheet: false
+          });
+        }
+
+
+      // create a function called addPoints that iterates through your table (row by row) to create markers and popups
+      function addPoints(model_data) {
+
+      // iterate through your table to set the marker to lat/long values for each row
+      //         for ( i = 0; i < Object.keys(data).length; i++){
+
+        console.log(Object.keys(model_data).length);
+
+        Object.values(model_data).forEach(function(raw_data){
+
+          if( raw_data.name === "Template" ){ return; }
+          
+          data = raw_data.all();
+          var i = 0;
+          
+          data.forEach(function(row) {
+
+            console.log(row.lat, row.lng)
+
+            var phtml = 'var tag = document.createElement(\'script\');\n'
               phtml += 'tag.src = "https://www.youtube.com/iframe_api";\n';
               phtml += 'var firstScriptTag = document.getElementsByTagName(\'script\')[0];\n';
               phtml += 'if(!firstScriptTag.id.includes(\'www-widgetapi-script\')){;\n'
@@ -250,7 +286,7 @@
               phtml += 'var player;\n';
               phtml += 'function onYouTubeIframeAPIReady() {\n';
               phtml += '  player = new YT.Player(\'player_'+ i +'\', {\n';
-              phtml += '    videoId: \'' + videoid + '\',\n';
+              phtml += '    videoId: \'' + row.videoid + '\',\n';
               phtml += '    events: {\n';
               phtml += '      \'onReady\': onPlayerReady,\n';
               phtml += '      \'onStateChange\': onPlayerStateChange\n';
@@ -285,19 +321,23 @@
               iframe.title="YouTube video player";
               iframe.width="250";
               iframe.height="250";
-              iframe.src="https://www.youtube.com/embed/" + videoid +"?enablejsapi=1&amp;widgetid=1";
+              iframe.src="https://www.youtube.com/embed/" + row.videoid +"?enablejsapi=1&amp;widgetid=1";
               script.innerHTML = phtml;
               iframe.appendChild(script);
 
-              var latlng = videos[videoid];
+
               var marker = new mapboxgl.Marker({color: "#ba8c8c"})
-              .setLngLat(videos[videoid])
+              .setLngLat([row.lng, row.lat])
               .setPopup(new mapboxgl.Popup().setDOMContent(iframe)) // add popup
               .addTo(map);
 
               i++;
 
-        }
+          });
+        });
+      
+      }
+
 
         // 1. addEventListner and filter event
         // 2. create a layer for the popups
