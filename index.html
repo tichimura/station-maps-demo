@@ -9,28 +9,10 @@
 <link href="https://assets.website-files.com/5f291534dceb6cd8f0e7a02f/6019601de8e906e629493c4b_mapbox_favicon_32x32.png" rel="shortcut icon" type="image/x-icon"/>	
 <style type="text/css">
 
-      body {
-        color: #404040;
-        font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
-        margin: 0;
-        padding: 0;
-        -webkit-font-smoothing: antialiased;
-      }
+    body { margin: 0; padding: 0; }
 
-      * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-      }
-      
-      .map {
-        position: absolute;
-        left: 33.3333%;
-        width: 66.6666%;
-        top: 0;
-        bottom: 0;
-      }
-
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; border-left: 1px solid #fff }
+    
     .mapboxgl-popup {
       padding-bottom: 5px;
     }
@@ -92,7 +74,7 @@
 
 <body>
 		
-<div id="map"></div>
+<div id="map" class=map></div>
 
 <script>
 
