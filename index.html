@@ -9,7 +9,29 @@
 <link href="https://assets.website-files.com/5f291534dceb6cd8f0e7a02f/6019601de8e906e629493c4b_mapbox_favicon_32x32.png" rel="shortcut icon" type="image/x-icon"/>	
 <style type="text/css">
 
-.mapboxgl-popup {
+      body {
+        color: #404040;
+        font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      
+      .map {
+        position: absolute;
+        left: 33.3333%;
+        width: 66.6666%;
+        top: 0;
+        bottom: 0;
+      }
+
+    .mapboxgl-popup {
       padding-bottom: 5px;
     }
 
@@ -230,7 +252,7 @@
               .setLngLat(e.lngLat)
               .setHTML(`<h3>` + e.features[0].properties.cnt + `</h3>`+`<h4 style="text-align: center">` + e.features[0].properties.nam + `</h4>`+`<h4 style="text-align: center">` + e.features[0].properties.pps + `</h4>`+`<h4 style="text-align: center">` + e.features[0].properties.srg + `</h4>`+`<h4 style="text-align: center">` + e.features[0].properties.rdn + `</h4>`)
               .addTo(map);
-        })
+        });
 
         var videos = {'RQA5RcIZlAM':[139.69936089963744, 35.69350996590232],'lkIJYc4UH60':[139.70030208085188,35.6595574453778],'ZbekZoIwPl4':[139.73070222009164,35.689708324156825]}; 
         var videoid;
